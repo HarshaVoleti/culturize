@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "140191280018",
+    "project_id": "culturize-a6df3",
+    "storage_bucket": "culturize-a6df3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140191280018:android:119fa5b0b94ddec9eb2f4b",
+        "android_client_info": {
+          "package_name": "com.example.culturize"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "140191280018-r5g5p47nusrc712tj23elp8110d517vq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.culturize",
+            "certificate_hash": "d0d364509e568751437d74a8d2716d0b70114bfb"
+          }
+        },
+        {
+          "client_id": "140191280018-qo86esde78ecdota3rdd3njek7k8q0h0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAryu0T8iM0GNyOUd4eVVAJR-klsMqs0Uc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "140191280018-qo86esde78ecdota3rdd3njek7k8q0h0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "140191280018-nj7vucnp687ls2ujsu5g7jhjdv5ra8cl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.culturize"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

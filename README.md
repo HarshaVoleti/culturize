@@ -51,7 +51,7 @@ flutter run
 
 ### Here is the quick tour on how our app inspire people to take action to preserve cultural heritage for future generations.
 
-<div align="center"><img src="https://user-images.githubusercontent.com/97936126/228750753-88443163-8ea3-4b48-bcbb-0da79980270a.png" width="200" height="350" ></div>
+<div align="center"><img src="https://user-images.githubusercontent.com/97936126/228750753-88443163-8ea3-4b48-bcbb-0da79980270a.png" width="200" height="400" ></div>
 After installing our app, Users can either log in with their email or sign up within the app.
 
 #### <h3><ins>Overview on learning section.</ins></h3>

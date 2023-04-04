@@ -26,8 +26,9 @@ The contents in this project follow the following structure, where all views are
 
   #### Tech Stack
   <ul>
-  <li>Flutter</li>
+  <li><img src="https://www.kindpng.com/picc/m/355-3557482_flutter-logo-png-transparent-png.png" width="30" height="30" alt="Flutter Logo Png, Transparent Png@kindpng.com">Flutter</li>
   <li>Firebase</li>
+  <li>Google Maps API(geo location, geocoding packages)</li>
   </ul>
 
   ##### Clone the repository

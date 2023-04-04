@@ -32,7 +32,7 @@ The contents in this project follow the following structure, where all views are
 
   ##### Clone the repository
 ```bash
-git clone https://github.com/SupriyaKuncha/culturize.git
+git clone https://github.com/HarshaVoleti/culturize.git
 ```
   ##### Move to the desired folder
 ```bash

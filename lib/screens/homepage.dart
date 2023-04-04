@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return Scaffold(
+    return  Scaffold(
       body: getbody(),
       bottomNavigationBar: getFooter(),
     );

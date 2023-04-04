@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   audio_video_progress_bar: ^1.0.1
+  audioplayers: ^3.0.1
   cached_network_image: ^3.2.3
   carousel_slider: ^4.2.1
   cloud_firestore: ^4.4.5
@@ -42,6 +43,7 @@ dependencies:
   fluttertoast: ^8.2.1
   google_fonts: ^4.0.3
   image_picker: ^0.8.7
+  permission_handler: ^10.2.0
   shared_preferences: ^2.0.18
 
 dev_dependencies:

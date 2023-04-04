@@ -109,7 +109,7 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
     gettingUserData();
     getProfilePic();
-    // getCurrentUserIdandName();
+    // getCurrentUserIdandName()
     print(username);
     print(email);
   }
@@ -172,228 +172,156 @@ class _ProfilePageState extends State<ProfilePage> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 10,
-            horizontal: 15,
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    popUpDialog(context);
-                  },
-                  child: Container(
-                    // backgroundColor: Colors.white,
-                    height: size.width * 0.40,
-                    width: size.width * 0.40,
+      body: Padding(
+        padding: EdgeInsets.only(left: 20, top: 80),
+        child: DefaultTabController(
+          length: 2,
+          child: NestedScrollView(
+            headerSliverBuilder: (context, _) {
+              return [
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      Container(
+                        alignment: Alignment.center,
+                        child: Row(
+                          // crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              // backgroundColor: Colors.white,
+                              height: size.width * 0.27,
+                              width: size.width * 0.27,
 
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: profilepic != ""
-                          ? DecorationImage(
-                              image: NetworkImage(profilepic),
-                              fit: BoxFit.fill,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: profilepic != ""
+                                    ? DecorationImage(
+                                        image: NetworkImage(profilepic),
+                                        fit: BoxFit.fill,
+                                      )
+                                    : DecorationImage(
+                                        image: NetworkImage(
+                                            "https://firebasestorage.googleapis.com/v0/b/culturize-a6df3.appspot.com/o/dp.png?alt=media&token=9ba7639d-b890-42b2-957c-65d7d8f15dd4"),
+                                        fit: BoxFit.fill,
+                                      ), // Use null-aware operator to conditionally create the FileImage
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: SizedBox(
+                                    width: size.width * 0.594,
+                                    child: Text(
+                                      name,
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 4,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: SizedBox(
+                                    width: size.width * 0.594,
+                                    child: Text(
+                                      email,
+                                      style: TextStyle(
+                                        fontSize: size.width * 0.04,
+                                        fontWeight: FontWeight.w600,
+                                        color: grey3,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    "Edit Profile",
+                                    style: GoogleFonts.raleway(
+                                      color: red,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             )
-                          : DecorationImage(
-                              image: NetworkImage(
-                                  "https://firebasestorage.googleapis.com/v0/b/culturize-a6df3.appspot.com/o/dp.png?alt=media&token=9ba7639d-b890-42b2-957c-65d7d8f15dd4"),
-                              fit: BoxFit.fill,
-                            ), // Use null-aware operator to conditionally create the FileImage
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: size.height * 0.06,
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: red,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Username : ",
-                            style: GoogleFonts.raleway(
-                              color: blue,
-                              fontSize: size.width * 0.05,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            username,
-                            style: GoogleFonts.raleway(
-                              color: grey4,
-                              fontSize: size.width * 0.05,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: size.height * 0.02,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Name : ",
-                            style: GoogleFonts.raleway(
-                              color: blue,
-                              fontSize: size.width * 0.05,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            name,
-                            style: GoogleFonts.raleway(
-                              color: grey4,
-                              fontSize: size.width * 0.05,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: size.height * 0.02,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Email ID : ",
-                            style: GoogleFonts.raleway(
-                              color: blue,
-                              fontSize: size.width * 0.05,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            email,
-                            style: GoogleFonts.raleway(
-                              color: grey4,
-                              fontSize: size.width * 0.05,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: size.height * 0.02,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Groups : ",
-                            style: GoogleFonts.raleway(
-                              color: blue,
-                              fontSize: size.width * 0.05,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          groupList(),
-                          // SingleChildScrollView(
-                          //   scrollDirection: Axis.vertical,
-                          //   child: StreamBuilder(
-                          //     stream: groups,
-                          //     builder: (context, AsyncSnapshot snapshot) {
-                          //       // make some checks
-                          //       if (snapshot.hasData) {
-                          //         if (snapshot.data['groups'] != null) {
-                          //           if (snapshot.data['groups'].length != 0) {
-                          //             return ListView.builder(
-                          //               itemCount:
-                          //                   snapshot.data['groups'].length,
-                          //               itemBuilder: (context, index) {
-                          //                 int reverseIndex =
-                          //                     snapshot.data['groups'].length -
-                          //                         index -
-                          //                         1;
-                          //                 return Text(
-                          //                   snapshot.data['groups']
-                          //                       [reverseIndex],
-                          //                   style: GoogleFonts.raleway(
-                          //                     color: blue,
-                          //                     fontSize: size.width * 0.05,
-                          //                   ),
-                          //                 );
-                          //               },
-                          //             );
-                          //           } else {
-                          //             return noGroupWidget("not in any group");
-                          //           }
-                          //         } else {
-                          //           return noGroupWidget(
-                          //               "You've not joined any groups.");
-                          //         }
-                          //       } else {
-                          //         return noGroupWidget("groups are loading");
-                          //       }
-                          //     },
-                          //   ),
-                          // ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: size.height * 0.04,
-                ),
-                TextButton(
-                  onPressed: () {
-                    showDialog(
-                        barrierDismissible: false,
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text("Logout"),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0),
+              ];
+            },
+            body: Column(
+              children: [
+                Container(
+                  height: 40,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 0,
+                    vertical: 5,
+                  ),
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        10,
+                      ),
+                      color: grey4,
+                    ),
+                    child: TabBar(
+                      labelStyle: GoogleFonts.raleway(
+                        fontWeight: FontWeight.bold,
+                      ),
+                      unselectedLabelStyle: GoogleFonts.raleway(),
+                      labelColor: Colors.white,
+                      unselectedLabelColor: blue,
+                      indicator: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                        color: red,
+                      ),
+                      tabs: [
+                        Tab(
+                          child: Text(
+                            "Posts",
+                            style: GoogleFonts.raleway(
+                              fontSize: size.width * 0.035,
                             ),
-                            content:
-                                const Text("Are you sure you want to logout?"),
-                            actions: [
-                              IconButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                icon: const Icon(
-                                  Icons.close_rounded,
-                                  color: Colors.red,
-                                ),
-                              ),
-                              IconButton(
-                                onPressed: () async {
-                                  await authService.signOut();
-                                  Navigator.of(context).pushAndRemoveUntil(
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const LoginPage()),
-                                      (route) => false);
-                                },
-                                icon: const Icon(
-                                  Icons.done,
-                                  color: Colors.green,
-                                ),
-                              ),
-                            ],
-                          );
-                        });
-                  },
-                  child: Text("log out"),
+                          ),
+                        ),
+                        Tab(
+                          child: Text(
+                            "Your Communities",
+                            style: GoogleFonts.raleway(
+                              fontSize: size.width * 0.035,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: TabBarView(
+                    children: [
+                      Center(
+                        child: Text("tab 2"),
+                      ),
+                      GroupsList(),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -403,61 +331,66 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  groupList() {
+  GroupsList() {
     final size = MediaQuery.of(context).size;
     return StreamBuilder(
-      stream: groups,
-      builder: (context, AsyncSnapshot snapshot) {
-        print("hello");
-        // make some checks
-        if (snapshot.hasData) {
-          if (snapshot.data['groups'] != null) {
-            if (snapshot.data['groups'].length != 0) {
-              // return noGroupWidget("groups will be shown here");
-              return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: List.generate(
-                    snapshot.data['groups'].length,
-                    (index) {
-                      int reverseIndex =
-                          snapshot.data['groups'].length - index - 1;
-                      return Text(
-                        snapshot.data['groups'][reverseIndex],
-                        style: GoogleFonts.raleway(
-                          color: grey4,
-                          fontSize: size.width * 0.05,
-                        ),
-                      );
-                    },
-                  )
-                  // ListView.builder(
-                  //   itemCount: snapshot.data['groups'].length,
-                  //   itemBuilder: (context, index) {
-                  //     int reverseIndex = snapshot.data['groups'].length - index - 1;
-                  //     return Text(
-                  //       snapshot.data['groups'][reverseIndex],
-                  //       style: GoogleFonts.raleway(
-                  //         color: blue,
-                  //         fontSize: size.width * 0.05,
-                  //       ),
-                  //     );
-                  //   },
-                  // ),
-
-                  );
-            } else {
-              return noGroupWidget("not in any group");
-            }
-          } else {
-            return noGroupWidget("You've not joined any groups.");
-          }
-        } else {
-          print("hello");
-          print(snapshot);
-
-          return noGroupWidget("groups are loading");
+      stream: FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return CircularProgressIndicator();
         }
+
+        var userGroups = snapshot.data!['groups'];
+        return FutureBuilder(
+          future: Future.wait((userGroups as List<dynamic>)
+              .map((groupName) => FirebaseFirestore.instance
+                  .collection('groups')
+                  .where('groupName', isEqualTo: groupName)
+                  .get())
+              .toList() as Iterable<Future>),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return CircularProgressIndicator();
+            }
+
+            var groupDocs = snapshot.data!;
+            return ListView.builder(
+              itemCount: groupDocs.length,
+              itemBuilder: (BuildContext context, int index) {
+                var groupData = groupDocs[index].docs[0].data();
+                return Row(
+                  children: [
+                    Container(
+                      // backgroundColor: Colors.white,
+                      height: size.width * 0.20,
+                      width: size.width * 0.20,
+
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: groupData['groupIcon'] != ""
+                            ? DecorationImage(
+                                image: NetworkImage(groupData['groupIcon']),
+                                fit: BoxFit.fill,
+                              )
+                            : DecorationImage(
+                                image: NetworkImage(
+                                    "https://firebasestorage.googleapis.com/v0/b/culturize-a6df3.appspot.com/o/dp.png?alt=media&token=9ba7639d-b890-42b2-957c-65d7d8f15dd4"),
+                                fit: BoxFit.fill,
+                              ), // Use null-aware operator to conditionally create the FileImage
+                      ),
+                    ),
+                    Text(
+                      groupData['groupName'],
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+        );
       },
     );
   }

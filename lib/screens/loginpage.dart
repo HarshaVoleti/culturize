@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                                   padding: const EdgeInsets.all(20.0),
                                   child: Container(
                                     // padding: EdgeInsets.all(20),
-                                    height: 500,
+                                    // height: size.height * 0.2,
                                     width: 900,
                                     decoration: BoxDecoration(
                                         // border: Border.all(
@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                             autoPlay: true,
                             enlargeCenterPage: true,
                             viewportFraction: 1.1,
-                            height: 300,
+                            height: size.height * 0.3,
                           ),
                         ),
                         //carousel ends here

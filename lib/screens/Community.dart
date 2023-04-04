@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:culturize/pages.dart';
+import 'package:culturize/screens/chatScreen.dart';
+import 'package:culturize/screens/communitypage.dart';
 import 'package:culturize/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -136,13 +138,17 @@ class _CommunityPageState extends State<CommunityPage> {
                     Tab(
                       child: Text(
                         "Your Communities",
-                        // style: GoogleFonts.raleway(color: blue),
+                        style: GoogleFonts.raleway(
+                          fontSize: size.width * 0.035,
+                        ),
                       ),
                     ),
                     Tab(
                       child: Text(
                         "Top Communities",
-                        // style: GoogleFonts.raleway(color: blue),
+                        style: GoogleFonts.raleway(
+                          fontSize: size.width * 0.035,
+                        ),
                       ),
                     ),
                   ],
@@ -154,7 +160,10 @@ class _CommunityPageState extends State<CommunityPage> {
         ),
         body: TabBarView(
           children: [
-            groupList(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: GroupsList(),
+            ),
             Container(
               child: StreamBuilder<QuerySnapshot>(
                 stream: usersRef.snapshots(),
@@ -169,20 +178,29 @@ class _CommunityPageState extends State<CommunityPage> {
                     shrinkWrap: true,
                     itemCount: snapshot.data!.docs.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10,
-                      childAspectRatio: size.height * 0.34 / size.width,
-                    ),
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 5 / 6.5
+                        // childAspectRatio: size.height * 0.34 / size.width,
+                        ),
                     itemBuilder: (context, index) {
                       final group = snapshot.data!.docs[index];
-                      return Column(
-                        // crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Stack(
-                            children: [
-                              Expanded(
-                                child: Container(
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CommunityDetailsPage(
+                                        id: group['groupID'],
+                                      )));
+                        },
+                        child: Column(
+                          // crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Stack(
+                              children: [
+                                Container(
                                   height: size.height * 0.282,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(6),
@@ -194,92 +212,87 @@ class _CommunityPageState extends State<CommunityPage> {
                                     ),
                                     // color: red,
                                   ),
-                                  child: Expanded(
-                                    child: Container(
-                                      // constraints: const BoxConstraints.tightForFinite(
-                                      //   100,
-                                      //   100,
-                                      // ),
-                                      // height: 100,
-                                      // width: 100,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(6),
-                                        color: bgblack,
-                                      ),
+                                  child: Container(
+                                    // constraints: const BoxConstraints.tightForFinite(
+                                    //   100,
+                                    //   100,
+                                    // ),
+                                    // height: 100,
+                                    // width: 100,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      color: bgblack,
                                     ),
                                   ),
                                 ),
-                              ),
-                              Positioned(
-                                bottom: 8,
-                                left: 8,
-                                right: 8,
-                                child: Container(
-                                  height: size.height * 0.131,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(6),
-                                    color: red,
-                                  ),
-                                  padding: EdgeInsets.all(5),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        height: size.width * 0.07,
-                                      ),
-                                      Text(
-                                        group['groupName'],
-                                        style: GoogleFonts.raleway(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
+                                Positioned(
+                                  bottom: 8,
+                                  left: 8,
+                                  right: 8,
+                                  child: Container(
+                                    height: size.height * 0.131,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      color: red,
+                                    ),
+                                    padding: EdgeInsets.all(5),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          height: size.width * 0.07,
                                         ),
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(2),
-                                        ),
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 20,
-                                          vertical: 2,
-                                        ),
-                                        child: InkWell(
-                                          onTap: () async {},
-                                          child: Text(
-                                            "View",
+                                        Text(
+                                          group['groupName'],
+                                          // maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          softWrap: true,
+                                          style: GoogleFonts.raleway(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                height: size.height * 0.282,
-                                child: Center(
-                                  child: CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                      group['groupIcon'],
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(2),
+                                          ),
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 20,
+                                            vertical: 2,
+                                          ),
+                                          child: InkWell(
+                                            onTap: () async {},
+                                            child: Text(
+                                              "View",
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    radius: size.width * 0.1,
                                   ),
                                 ),
-                              )
-                            ],
-                          ),
-                        ],
+                                Container(
+                                  height: size.height * 0.282,
+                                  child: Center(
+                                    child: CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                        group['groupIcon'],
+                                      ),
+                                      radius: size.width * 0.1,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       );
-                      // return UserCard(
-                      //   name: group['groupName'],
-                      //   username: group['groupId'],
-                      //   email: group['groupName'],
-                      //   photoUrl: group['groupName'],
-                      // );
                     },
                   );
                 },
@@ -288,6 +301,97 @@ class _CommunityPageState extends State<CommunityPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget GroupsList() {
+    final size = MediaQuery.of(context).size;
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return CircularProgressIndicator();
+        }
+
+        var userGroups = snapshot.data!['groups'];
+        return FutureBuilder(
+          future: Future.wait((userGroups as List<dynamic>)
+              .map((groupName) => FirebaseFirestore.instance
+                  .collection('groups')
+                  .where('groupName', isEqualTo: groupName)
+                  .get())
+              .toList() as Iterable<Future>),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return CircularProgressIndicator();
+            }
+
+            var groupDocs = snapshot.data!;
+
+            return ListView.builder(
+              padding: EdgeInsets.all(0),
+              // shrinkWrap: true,
+              itemCount: groupDocs.length,
+              itemBuilder: (BuildContext context, int index) {
+                var groupData = groupDocs[index].docs[0].data();
+                return Container(
+                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChatScreen(
+                            groupID: groupData['groupID'],
+                            groupName: groupData["groupName"],
+                            username: username,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Container(
+                          // backgroundColor: Colors.white,
+                          height: size.width * 0.15,
+                          width: size.width * 0.15,
+
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: groupData['groupIcon'] != ""
+                                ? DecorationImage(
+                                    image: NetworkImage(groupData['groupIcon']),
+                                    fit: BoxFit.fitHeight,
+                                  )
+                                : DecorationImage(
+                                    image: NetworkImage(
+                                        "https://firebasestorage.googleapis.com/v0/b/culturize-a6df3.appspot.com/o/dp.png?alt=media&token=9ba7639d-b890-42b2-957c-65d7d8f15dd4"),
+                                    fit: BoxFit.fill,
+                                  ), // Use null-aware operator to conditionally create the FileImage
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          groupData['groupName'],
+                          style: GoogleFonts.raleway(
+                            fontSize: size.width * 0.04,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        );
+      },
     );
   }
 

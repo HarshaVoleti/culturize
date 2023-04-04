@@ -1,12 +1,18 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:culturize/methods.dart';
+// import 'package:geocoding/geocoding.dart';
 import 'package:culturize/pages.dart';
+import 'package:culturize/screens/subjectpage.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:culturize/screens/addpostpage.dart';
 import 'package:culturize/screens/audioblogscreen.dart';
 import 'package:culturize/screens/textblogpage.dart';
 import 'package:culturize/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
+// import 'package:geolocator/geolocator.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,19 +30,43 @@ class _LearnPageState extends State<LearnPage> {
   String _username = "";
   String _name = "";
   String _email = "";
+  String city = "";
+
   final CollectionReference audioblogsRef =
       FirebaseFirestore.instance.collection('audioblogs');
   final CollectionReference textblogsRef =
       FirebaseFirestore.instance.collection('TextBlogs');
+  final CollectionReference subjectsRef =
+      FirebaseFirestore.instance.collection('Subjects');
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     gettingUserData();
+    // getPosition();
     print(_username);
     print(_email);
+    print(city);
   }
+
+  // getPosition() async {
+  //   Map<Permission, PermissionStatus> status = await [
+  //     Permission.location,
+  //     Permission.camera,
+  //     Permission.microphone,
+  //   ].request();
+
+  //   Position position = await Geolocator.getCurrentPosition(
+  //     desiredAccuracy: LocationAccuracy.high,
+  //   );
+  //   List<Placemark> placemarks = await placemarkFromCoordinates(
+  //     position.latitude,
+  //     position.longitude,
+  //   );
+  //   city = placemarks[0].locality!;
+  //   print('The user is in $city');
+  // }
 
   gettingUserData() async {
     await HelperFunctions.getUserNameFromSF().then((value) {
@@ -59,7 +89,7 @@ class _LearnPageState extends State<LearnPage> {
 
   @override
   Widget build(BuildContext context) {
-    String? name = _auth.currentUser!.displayName;
+    // String? name = _auth.currentUser!.displayName;
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -96,9 +126,20 @@ class _LearnPageState extends State<LearnPage> {
           SizedBox(
             width: size.width * 0.05,
           ),
-          SvgPicture.asset(
-            'assets/icons/settings.svg',
-            height: size.width * 0.07,
+          IconButton(
+            onPressed: () {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => AddPost(),
+              //   ),
+              // );
+            },
+            icon: Icon(
+              Icons.add_box_rounded,
+              color: Colors.black,
+              size: size.width * 0.08,
+            ),
           ),
           SizedBox(
             width: size.width * 0.05,
@@ -174,6 +215,101 @@ class _LearnPageState extends State<LearnPage> {
               ),
             ),
             Padding(
+              padding: EdgeInsets.all(15.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "We promote",
+                        style: GoogleFonts.raleway(
+                          fontSize: size.width * 0.05,
+                          fontWeight: FontWeight.bold,
+                          color: blue,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "View all",
+                          style: GoogleFonts.raleway(
+                            fontSize: size.width * 0.035,
+                            fontWeight: FontWeight.w600,
+                            color: red,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  StreamBuilder(
+                    stream: subjectsRef.snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: List.generate(
+                            snapshot.data!.docs.length,
+                            (index) {
+                              final subjects = snapshot.data!.docs[index];
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 30.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => SubjectPage(
+                                          image: subjects['Image'],
+                                          subject: subjects['title'],
+                                          description: subjects['desc'],
+                                          subtitle: subjects['subtitle'],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        width: size.width * 0.3,
+                                        height: size.width * 0.3,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                            image:
+                                                NetworkImage(subjects['Image']),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        subjects['title'],
+                                        style: GoogleFonts.raleway(
+                                          fontSize: size.width * 0.04,
+                                          fontWeight: FontWeight.w600,
+                                          color: blue,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
                 children: [
@@ -181,7 +317,7 @@ class _LearnPageState extends State<LearnPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Know about culture",
+                        "Blogs",
                         style: GoogleFonts.raleway(
                           fontSize: size.width * 0.05,
                           fontWeight: FontWeight.bold,
@@ -207,7 +343,6 @@ class _LearnPageState extends State<LearnPage> {
                       if (!snapshot.hasData) {
                         return Center(child: CircularProgressIndicator());
                       }
-
                       return SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
@@ -238,8 +373,8 @@ class _LearnPageState extends State<LearnPage> {
                                   child: Stack(
                                     children: [
                                       Container(
-                                        height: 210,
-                                        width: 210,
+                                        height: size.width * 0.5,
+                                        width: size.width * 0.5,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(6),
@@ -325,106 +460,6 @@ class _LearnPageState extends State<LearnPage> {
                       );
                     },
                   ),
-                  // SingleChildScrollView(
-                  //   scrollDirection: Axis.horizontal,
-                  //   child: Row(
-                  //     children: List.generate(
-                  //       textblogs.length,
-                  //       (index) => Padding(
-                  //         padding: const EdgeInsets.only(right: 20),
-                  //         child: GestureDetector(
-                  //           onTap: () {
-                  //             // Navigator.push(
-                  //             //     context,
-                  //             // MaterialPageRoute(
-                  //             //   builder: (context) => TextBlog(
-                  //             //     label: textblogs[index]['label'],
-                  //             //     desc: textblogs[index]['description'],
-                  //             //     img: textblogs[index]['img'],
-                  //             //     title: textblogs[index]['name'],
-                  //             //   ),
-                  //             // ));
-                  //           },
-                  //           child: Stack(
-                  //             children: [
-                  //               Container(
-                  //                 height: 210,
-                  //                 width: 210,
-                  //                 decoration: BoxDecoration(
-                  //                   borderRadius: BorderRadius.circular(6),
-                  //                   image: DecorationImage(
-                  //                     image: AssetImage(
-                  //                       textblogs[index]['img'],
-                  //                     ),
-                  //                     fit: BoxFit.fill,
-                  //                   ),
-                  //                 ),
-                  //                 child: Container(
-                  //                   // constraints: const BoxConstraints.tightForFinite(
-                  //                   //   100,
-                  //                   //   100,
-                  //                   // ),
-                  //                   // height: 100,
-                  //                   // width: 100,
-                  //                   decoration: BoxDecoration(
-                  //                     borderRadius: BorderRadius.circular(6),
-                  //                     color: bgblack,
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //               Positioned(
-                  //                 bottom: 8,
-                  //                 left: 8,
-                  //                 right: 8,
-                  //                 child: Container(
-                  //                   decoration: BoxDecoration(
-                  //                     borderRadius: BorderRadius.circular(6),
-                  //                     color: red,
-                  //                   ),
-                  //                   padding: EdgeInsets.all(5),
-                  //                   child: Column(
-                  //                     mainAxisAlignment:
-                  //                         MainAxisAlignment.spaceEvenly,
-                  //                     crossAxisAlignment:
-                  //                         CrossAxisAlignment.start,
-                  //                     children: [
-                  //                       Text(
-                  //                         textblogs[index]['name'],
-                  //                         style: GoogleFonts.raleway(
-                  //                           fontSize: size.width * 0.035,
-                  //                           fontWeight: FontWeight.bold,
-                  //                           color: Colors.white,
-                  //                         ),
-                  //                       ),
-                  //                       Container(
-                  //                         decoration: BoxDecoration(
-                  //                           color: Colors.white,
-                  //                           borderRadius:
-                  //                               BorderRadius.circular(2),
-                  //                         ),
-                  //                         padding: EdgeInsets.symmetric(
-                  //                           horizontal: 20,
-                  //                           vertical: 2,
-                  //                         ),
-                  //                         child: Text(
-                  //                           "Potery",
-                  //                           style: GoogleFonts.raleway(
-                  //                             fontSize: 12,
-                  //                             fontWeight: FontWeight.w600,
-                  //                           ),
-                  //                         ),
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //               )
-                  //             ],
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             ),
@@ -494,10 +529,12 @@ class _LearnPageState extends State<LearnPage> {
                                     );
                                   },
                                   child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        height: 210,
-                                        width: 210,
+                                        height: size.width * 0.5,
+                                        width: size.width * 0.5,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(6),
@@ -525,8 +562,7 @@ class _LearnPageState extends State<LearnPage> {
                                       ),
                                       Container(
                                         padding: EdgeInsets.symmetric(
-                                            horizontal: 10, vertical: 5),
-                                        width: 220,
+                                            horizontal: 0, vertical: 5),
                                         child: Text(
                                           snapshot.data!.docs[index]['Title'],
                                           maxLines: 2,

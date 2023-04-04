@@ -9,6 +9,8 @@ class DatabaseService {
       FirebaseFirestore.instance.collection("users");
   final CollectionReference groupCollection =
       FirebaseFirestore.instance.collection("groups");
+  final CollectionReference postCollection =
+      FirebaseFirestore.instance.collection("posts");
 
   // saving the userdata
   Future savingUserData(
@@ -28,6 +30,18 @@ class DatabaseService {
   Future gettingUserData(String email) async {
     QuerySnapshot snapshot =
         await userCollection.where("email", isEqualTo: email).get();
+    return snapshot;
+  }
+
+  Future gettingGroupData(String name) async {
+    QuerySnapshot snapshot =
+        await userCollection.where("groupName", isEqualTo: name).get();
+    return snapshot;
+  }
+
+  Future gettingPostData(String iD) async {
+    QuerySnapshot snapshot =
+        await userCollection.where("senderID", isEqualTo: iD).get();
     return snapshot;
   }
 
@@ -72,6 +86,12 @@ class DatabaseService {
     DocumentReference d = groupCollection.doc(groupName);
     DocumentSnapshot documentSnapshot = await d.get();
     return documentSnapshot['admin'];
+  }
+
+  Future getGroupData(String groupName) async {
+    DocumentReference d = groupCollection.doc(groupName);
+    DocumentSnapshot documentSnapshot = await d.get();
+    return documentSnapshot;
   }
 
   // get group members

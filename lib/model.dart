@@ -1,4 +1,5 @@
 import 'package:culturize/pages.dart';
+import 'package:culturize/screens/profilepage.dart';
 import 'package:flutter/material.dart';
 
 Color red = Color.fromRGBO(254, 86, 103, 1);
@@ -38,7 +39,7 @@ List<Widget> pages = [
   const LearnPage(),
   const SearchPage(),
   const CommunityPage(),
-  const ProfilePage(),
+  const ProfileScreen(),
 ];
 
 List pagenames = [

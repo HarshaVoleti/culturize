@@ -26,9 +26,9 @@ The contents in this project follow the following structure, where all views are
 
   #### Tech Stack
   <ul>
-  <li><img src="https://img.icons8.com/color/48/null/flutter.png" width="20" height="20">Flutter</li>
-  <li>Firebase</li>
-  <li>Google Maps API(geo location, geocoding packages)</li>
+  <li><img src="https://img.icons8.com/color/48/null/flutter.png" width="20" height="20">  Flutter</li>
+  <li> <img src="https://img.icons8.com/color/48/null/firebase.png" width="20" height="20">Firebase</li>
+  <li> <img src="https://img.icons8.com/color/48/null/google-maps-new.png" width="20" height="20">Google Maps API(geo location, geocoding packages)</li>
   </ul>
 
   ##### Clone the repository

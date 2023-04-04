@@ -58,9 +58,9 @@ After installing our app, Users can either log in with their email or sign up wi
 After completing the process, you will be directed to the home page, which is a learning section. It contains blogs in text and audio formats, allowing users to learn about cultures they are interested in.
 
 <div display="flex" align="center" border-left="2px solid white">
-<img src="https://user-images.githubusercontent.com/97936126/229842089-b94e69d5-dfb8-4054-b6e8-9c17e0a0d525.png" width="200" height="450" >
+<img src="https://user-images.githubusercontent.com/97936126/229842089-b94e69d5-dfb8-4054-b6e8-9c17e0a0d525.png" width="200" height="400" >
 
-<img src="https://user-images.githubusercontent.com/97936126/229848378-52492b82-a056-46c6-a130-aaaa343d18cf.png" width="200" height="450" >
+<img src="https://user-images.githubusercontent.com/97936126/229848378-52492b82-a056-46c6-a130-aaaa343d18cf.png" width="200" height="400" >
 </div>
 
 
@@ -71,9 +71,9 @@ On the search section, users can search for specific tutorials, communities to j
 If you are a first-time user, you will be directed to the Top Communities page, where all the active communities are displayed. From there, you can join communities, interact with fellow enthusiasts, and register for workshops they conduct. The communities you have joined will be displayed in your Communities section.
 
 <div display="flex" align="center" border-left="2px solid white">
-<img src="https://user-images.githubusercontent.com/97936126/229849424-74df9348-2808-4ef4-80ac-1239bf3b415f.png" width="200" height="450" >
+<img src="https://user-images.githubusercontent.com/97936126/229849424-74df9348-2808-4ef4-80ac-1239bf3b415f.png" width="200" height="400" >
 
-<img src="https://user-images.githubusercontent.com/97936126/229846461-eed93a9f-5e35-45b2-8ee0-3e75c40c5bcb.png" width="200" height="450" >
+<img src="https://user-images.githubusercontent.com/97936126/229846461-eed93a9f-5e35-45b2-8ee0-3e75c40c5bcb.png" width="200" height="400" >
 </div>
 
 

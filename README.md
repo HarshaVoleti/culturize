@@ -4,7 +4,7 @@
 
 click here to view our project demo👇
 
-<a href="https://youtu.be/di-NOZWqgQY" target=”_blank”>
+<a href="https://youtu.be/di-NOZWqgQY" target="_blank">
 <img src="https://user-images.githubusercontent.com/97936126/229847805-dc0eda2c-4925-451d-bceb-7b3fa29167e3.jpg" width="100%" >                             
 </a>
 

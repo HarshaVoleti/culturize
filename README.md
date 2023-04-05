@@ -1,6 +1,13 @@
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FSupriyaKuncha%2Fculturize&count_bg=%23FE5667&title_bg=%23FE5667&icon=github.svg&icon_color=%23FFFFFF&title=Repository+Visits&edge_flat=false)](https://hits.seeyoufarm.com)
 
-<img src="https://user-images.githubusercontent.com/97936126/229847805-dc0eda2c-4925-451d-bceb-7b3fa29167e3.jpg" width="100%" >
+<h2>Video Submission</h2>
+
+click here to view our project demo👇
+
+<a href="https://youtu.be/di-NOZWqgQY">
+<img src="https://user-images.githubusercontent.com/97936126/229847805-dc0eda2c-4925-451d-bceb-7b3fa29167e3.jpg" width="100%" >                             
+</a>
+
   <h1 align="center"> Culturize </h1>
 <p align="center">A <b>Google DSC Solution Challenge</b> submission</p>
 
